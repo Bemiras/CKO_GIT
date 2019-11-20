@@ -4,17 +4,23 @@
 namespace App\Http\Controllers;
 
 use App\Direction;
-use Request;
+use Illuminate\Http\Request;
 use App\Repositories\DirectionRepository;
+use Illuminate\Support\Facades\Auth;
 
 
-class DirectionofferController
+class DirectionofferController extends Controller
 {
-    public function index(){
+    public function index()
+    {
+        if (!Auth::check())
+            return redirect('/login');
+        else {
 
-        $users = Direction::all()->sortBy('id');
+            $users = Direction::all()->sortBy('id');
 
-        return view('admin.directionoffer',["userlist"=>$users]);
+            return view('admin.directionoffer', ["userlist" => $users]);
+        }
     }
 
     public function store()
@@ -43,11 +49,10 @@ class DirectionofferController
         $direction->delete();
         return redirect()->action('DirectionofferController@index');
         }
-    
-    public function update(){
-        $direction  = Direction::find(Request::input('id'));
-        $direction->id =  Request::input('id');
-        $direction->name =  Request::input('name');
+
+    public function update($id, Request $request){
+        $direction  = Direction::find($id);
+        $direction->name = $request->input('name');
         $direction->save();
         return redirect()->action('DirectionofferController@index');
     }

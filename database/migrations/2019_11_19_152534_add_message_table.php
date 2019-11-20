@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddForeignComissionsToCard extends Migration
+class AddMessageTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,12 @@ class AddForeignComissionsToCard extends Migration
      */
     public function up()
     {
-        Schema::table('cards',function (Blueprint $table){
-            $table->foreign('commission_id')->references('id')->on('commissions')->onDelete('cascade');
+        Schema::create('messages', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('sender');
+            $table->integer('recipient');
+            $table->string('message');
+            $table->timestamps();
         });
     }
 

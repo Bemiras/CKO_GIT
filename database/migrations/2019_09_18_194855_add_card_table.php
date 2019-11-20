@@ -21,7 +21,6 @@ class AddCardTable extends Migration
              $table->string('promoter');
              $table->integer('commission_id')->unsigned();
              $table->integer('userPromoter');
-             $table->string('commente')->nullable();
             $table->timestamps();
         });
     }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddForeignComissionsToCard extends Migration
+class AddForeignWorkerCzlonekToCommissions extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddForeignComissionsToCard extends Migration
      */
     public function up()
     {
-        Schema::table('cards',function (Blueprint $table){
-            $table->foreign('commission_id')->references('id')->on('commissions')->onDelete('cascade');
+        Schema::table('commissions',function (Blueprint $table){
+            $table->foreign('workerCzlonek')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

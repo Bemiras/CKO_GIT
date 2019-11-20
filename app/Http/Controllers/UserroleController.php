@@ -8,28 +8,46 @@ use App\Commission;
 use App\Repositories\UserRepository;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class UserroleController
 {
     public function index(){
-        $workers = User::all()
-            ->where("role","pracownik")
-            ->sortBy('id');
+        if(!Auth::check())
+            return redirect('/login');
+        else {
 
-        return view('admin.userrole',["workerlist"=>$workers]);
-    }
-    public function edit($id, UserRepository $userRepo){
-        $workers  = User::find($id);
-        return view('admin.editrole', ['workers'=>$workers]);
+         $workers = DB::table('users')
+               ->join('departments', 'departments.id', '=', 'users.department')
+               ->where("role","pracownik")
+               ->select('users.*', 'users.name AS user_name', 'departments.name AS name_department'
+                   ,'users.specialization AS user_specialization','users.id AS user_id','users.lastname AS user_lastname')
+               ->get();
+
+            return view('admin.userrole', ["workerlist" => $workers]);
+
+        }
     }
 
-    public function update()
-    {
-        $worker  = User::find(Request::input('id'));
-        $worker->specialization =  Request::input('specialization');
+    public function edit($id){
+        $workers = DB::table('users')
+            ->join('departments', 'departments.id', '=', 'users.department')
+            ->where("users.id","$id")
+            ->select('users.*', 'users.name AS user_name', 'departments.name AS name_department'
+                ,'users.specialization AS user_specialization','users.id AS user_id','users.lastname AS user_lastname')
+            ->get();
+
+        return view('admin.editrole', ['workerlist'=>$workers]);
+    }
+
+
+    public function update($id, Request $request){
+        $worker  = User::find($id);
+        $worker->specialization = $request->input('specialization');
         $worker->save();
         return redirect()->action('UserroleController@index');
-    }
+        }
 
     public function showRegistrations(){
         return view('admin.employeeRegistrations');

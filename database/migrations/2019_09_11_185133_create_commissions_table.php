@@ -15,10 +15,11 @@ class CreateCommissionsTable extends Migration
     {
         Schema::create('commissions', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('number_commission');
-            $table->string('role_commission');
             $table->string('name');
-            $table->integer('usernumber_commission');
+            $table->integer('workerPrzewodniczacy');
+            $table->integer('workerZastepca');
+            $table->integer('workerSekretarz');
+            $table->integer('workerCzlonek');
             $table->timestamps();
         });
     }

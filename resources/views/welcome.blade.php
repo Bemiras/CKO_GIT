@@ -19,6 +19,12 @@
                 font-weight: 100;
                 height: 100vh;
                 margin: 0;
+                background: url('{{ asset('/images/student.png')}}');
+                background-position: center center;
+                background-repeat: no-repeat;
+                background-size: cover;
+                height: 100vh;
+                width: 100%;
             }
 
             .full-height {
@@ -46,7 +52,12 @@
             }
 
             .title {
-                font-size: 84px;
+                font-size: 64px;
+                color: #000000;
+                font-weight: bolder;
+                vertical-align: bottom ;
+                padding: 0 25px;
+                text-transform: uppercase;
             }
 
             .links > a {
@@ -79,11 +90,12 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    CYFROWA KARTA OBIEGOWA
+                    CYFROWA KARTA OBIEGOWA</br></br></br></br></br>
+
                 </div>
 
                 <div class="links">
-                    Politechnika Lubelska
+
                 </div>
             </div>
         </div>

@@ -4,17 +4,17 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddForeignComissionsToCard extends Migration
+class AddForeignSenderToUsers extends Migration
 {
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up()
+    Public function up()
     {
-        Schema::table('cards',function (Blueprint $table){
-            $table->foreign('commission_id')->references('id')->on('commissions')->onDelete('cascade');
+        Schema::table('messages',function (Blueprint $table){
+            $table->foreign('sender')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

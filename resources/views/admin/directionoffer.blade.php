@@ -28,7 +28,7 @@
 </table>
 
 <div align="center" class="panel-body">
-    <a style="width: 40%;" href="{{ action('DirectionofferController@create') }}" class="btn btn-info">Dodaj kierunek</a>
+    <a style="width: 15%;" href="{{ action('DirectionofferController@create') }}" class="btn btn-info">Dodaj kierunek</a>
 </div>
 
 

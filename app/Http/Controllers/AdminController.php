@@ -3,10 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
     public function index(){
-        return view('admin.createadmin');
+        if(!Auth::check())
+            return redirect('/login');
+        else {
+            return view('admin.createadmin');
+        }
     }
 }

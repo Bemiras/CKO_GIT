@@ -4,17 +4,25 @@
 namespace App\Http\Controllers;
 
 use App\Department;
-use Request;
+
 use App\Repositories\DepartmentRepository;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 
-class DepartmentofferController
+class DepartmentofferController extends Controller
+
 {
-    public function index(){
+    public function index()
+    {
+        if (!Auth::check())
+            return redirect('/login');
+        else {
 
-        $users = Department::all()->sortBy('id');
+            $users = Department::all()->sortBy('id');
 
-        return view('admin.departmentoffer',["userlist"=>$users]);
+            return view('admin.departmentoffer', ["userlist" => $users]);
+        }
     }
 
     public function store()
@@ -44,9 +52,9 @@ class DepartmentofferController
         return redirect()->action('DepartmentofferController@index');
         }
     
-    public function update(){
-        $department  = Department::find(Request::input('id'));
-        $department->name =  Request::input('name');
+    public function update($id, Request $request){
+        $department  = Department::find($id);
+        $department->name = $request->input('name');
         $department->save();
         return redirect()->action('DepartmentofferController@index');
     }

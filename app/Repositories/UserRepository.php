@@ -12,6 +12,6 @@ class UserRepository {
     }
 
     public function getAllWorkers(){
-        return $this->model->where('role','!=', 'student')->orderBy('name','asc')->get();
+        return $this->model->where('role','pracownik')->orderBy('name','asc')->get();
     }
 }

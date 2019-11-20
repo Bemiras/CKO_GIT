@@ -27,7 +27,7 @@
 </table>
 
 <div align="center" class="panel-body">
-    <a style="width: 40%;" href="{{ action('DepartmentofferController@create') }}" class="btn btn-info">Dodaj wydział</a>
+    <a style="width: 15%;" href="{{ action('DepartmentofferController@create') }}" class="btn btn-info">Dodaj wydział</a>
 </div>
 
 

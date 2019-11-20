@@ -9,16 +9,20 @@ use Illuminate\Support\Facades\DB;
 use App\User;
 class DataChangeRequestsController extends Controller
 {
-    public function __construct()
-    {
+    public function __construct(){
         $this->middleware('auth');
     }
 
     public function index()
     {
-        $dataToChange = ApplicationForChangingData::where('user_id',Auth::user()->id)->get();
-        return view ('dataChangeRequests', ["isDataToChangeExist" => $dataToChange]);
+        if (!Auth::check())
+            return redirect('/login');
+        else {
+            $dataToChange = ApplicationForChangingData::where('user_id', Auth::user()->id)->get();
+            return view('dataChangeRequests', ["isDataToChangeExist" => $dataToChange]);
+        }
     }
+
     public function sendApplicationForChangingData(Request $request){
         $dataToStore = new ApplicationForChangingData;
 

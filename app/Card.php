@@ -23,4 +23,7 @@ class Card extends Model
     public function aboutdeanery(){
         return $this->belongsTo(Card::class, 'deanery');
     }
+    public function aboutpromoter(){
+        return $this->belongsTo(Card::class, 'promoter');
+    }
 }

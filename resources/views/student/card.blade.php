@@ -15,10 +15,6 @@
     
 <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
     </br>
-    <div class="form-group">
-        <label for="title">Numer komisji:</label>
-        <input align="center"  style="width: 10%;" type="number" class="form-control" name="number_commission" />
-    </div>
 
     <label for="title">Promotor</label>
     <div>
@@ -32,7 +28,7 @@
     <label for="title">Nazwa komisji</label>
     <div>
 
-        <select align="center"  style="width:30%;" name="name">
+        <select align="center"  style="width:30%;" name="commission_id">
             @foreach ($commissions->unique('name') as $commission)
             <option value="{{ $commission->id}}">{{ $commission->name }} </option>
             @endforeach

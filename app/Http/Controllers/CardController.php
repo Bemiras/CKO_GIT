@@ -15,22 +15,24 @@ use Illuminate\Support\Facades\Auth;
 class CardController extends Controller
 {
     public function index(){
-
+        if(!Auth::check())
+            return redirect('/login');
+        else {
             $card = DB::table('Users')
-            ->join('Cards', function ($join) {
-            $join->on('Users.id_card', '=', 'Cards.id')
-                 ->where('Users.id_card', '=', Auth::user()->id_card);
-            })
-            ->get();
+                ->join('Cards', function ($join) {
+                    $join->on('Users.id_card', '=', 'Cards.id')
+                        ->where('Users.id_card', '=', Auth::user()->id_card);
+                })
+                ->get();
 
             $promoter = DB::table('Users')
-                    ->where('Users.specialization', '=', 'promotor')
-                    ->get();
+                ->where('Users.specialization', '=', 'promotor')
+                ->get();
 
             $commission = DB::table('Commissions')
-                    ->get();
-            return view('student.card',["cardlist"=>$card, "promoters"=>$promoter, "commissions"=>$commission]);
-
+                ->get();
+            return view('student.card', ["cardlist" => $card, "promoters" => $promoter, "commissions" => $commission]);
+        }
     }
 
     public function store(){
@@ -40,7 +42,7 @@ class CardController extends Controller
          'dormitory' => 'W trakcie',
          'deanery' => 'W trakcie',
          'promoter' => 'W trakcie',
-        'commission_id' => Request('number_commission'),
+        'commission_id' => Request('commission_id'),
         'userPromoter' => Request('promoter')
         ]);
 
